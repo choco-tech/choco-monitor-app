@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:choco_health_monitor/app/core/climate/climate_repository.dart';
 import 'package:choco_health_monitor/app/core/climate/climate_response.dart';
+import 'package:choco_health_monitor/app/core/notifications.dart';
 import 'package:choco_health_monitor/app/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,13 +39,54 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
+
     refreshData();
 
     mytimer = Timer.periodic(const Duration(seconds: 10), (timer) {
       refreshData();
     });
 
-    super.initState();
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Permitir Notificações'),
+            content: const Text('Nossa aplicativo deseja enviar notificações'),
+            actions: [
+              // Negar
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Negar',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 182, 76, 74),
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              // Permitir
+              TextButton(
+                onPressed: () => AwesomeNotifications()
+                    .requestPermissionToSendNotifications()
+                    .then((_) => Navigator.pop(context)),
+                child: const Text(
+                  'Permitir',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 111, 151, 221),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -58,7 +101,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: context.colors.background,
       floatingActionButton: FloatingActionButton(
-        onPressed: refreshData,
+        onPressed: () {
+          // refreshData();
+          createSimpleNotification();
+        },
         child: const Icon(Icons.refresh),
       ),
       body: Center(

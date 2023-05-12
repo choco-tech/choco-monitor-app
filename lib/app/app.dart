@@ -1,4 +1,4 @@
-import 'package:choco_health_monitor/app/core/climate/climate_repository.dart';
+import 'package:choco_health_monitor/app/core/firebase/database/climate_repository.dart';
 import 'package:choco_health_monitor/app/pages/home_page.dart';
 import 'package:choco_health_monitor/app/pages/second_page.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'My Smart App',
+      title: 'Choco Monitor',
       theme: FlexThemeData.light(scheme: FlexScheme.brandBlue),
       darkTheme: FlexThemeData.dark(scheme: FlexScheme.orangeM3),
       themeMode: ThemeMode.light,
@@ -26,15 +26,14 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.factory((i) => Dio()),
-        Bind.singleton((i) => ClimateRepository(i())),
+        Bind.singleton((i) => ClimateRepository()),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
           '/',
-          child: (context, args) =>
-              HomePage(climateRepository: Modular.get<ClimateRepository>()),
+          child: (context, args) => const HomePage(),
         ),
         ChildRoute('/second', child: (context, args) => const SecondPage()),
       ];

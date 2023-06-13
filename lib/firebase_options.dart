@@ -53,11 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDZ1_cuV7l9WuztxspZYxMLfsqzWqy6_IU',
-    appId: '1:7231607455:android:38a1f386c248959a6f88aa',
-    messagingSenderId: '7231607455',
-    projectId: 'choco-tech-app',
-    databaseURL: 'https://choco-tech-app-default-rtdb.firebaseio.com',
-    storageBucket: 'choco-tech-app.appspot.com',
+    apiKey: '<api-key>',
+    appId: '<app-id>',
+    messagingSenderId: '<sender_id>',
+    projectId: '<project_id>',
+    databaseURL: '<database_url>',
+    storageBucket: '<storage_bucket>',
   );
 }

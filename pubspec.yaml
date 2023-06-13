@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^4.0.3
   firebase_core: ^2.10.0
   firebase_database: ^10.1.1
+  sprintf: ^7.0.0
 
 dev_dependencies:
   flutter_test:

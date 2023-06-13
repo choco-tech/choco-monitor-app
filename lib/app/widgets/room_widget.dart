@@ -7,8 +7,10 @@ import '../core/room/room.dart';
 
 class RoomWidget extends StatefulWidget {
   final String roomId;
-  final double margin = 15;
+  final double margin = 20;
   final double borderRadius = 20;
+  final double fontSize = 30;
+  final double iconSize = 35;
 
   const RoomWidget({super.key, required this.roomId});
 
@@ -17,7 +19,7 @@ class RoomWidget extends StatefulWidget {
 }
 
 class _RoomWidgetState extends State<RoomWidget> {
-  Room room = Room('roomId', 'name', 0, 0, DateTime.now());
+  Room room = Room('roomId', 'roomName', 0, 0, DateTime.now());
 
   @override
   void initState() {
@@ -48,8 +50,7 @@ class _RoomWidgetState extends State<RoomWidget> {
         borderRadius: BorderRadius.all(
           Radius.circular(widget.borderRadius),
         ),
-        color: const Color.fromRGBO(32, 32, 32, 1),
-        //border: Border.all(color: Colors.white, width: 1),
+        color: const Color.fromRGBO(40, 40, 40, 1),
       ),
       child: Column(
         children: [
@@ -64,7 +65,7 @@ class _RoomWidgetState extends State<RoomWidget> {
                   style: GoogleFonts.roboto(
                     color: const Color.fromARGB(199, 255, 255, 255),
                     fontSize: 30,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w400,
                   ),
                 )
               ],
@@ -72,7 +73,7 @@ class _RoomWidgetState extends State<RoomWidget> {
           ),
           // Temperatura e Umidade
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 margin: const EdgeInsets.all(20),
@@ -82,13 +83,13 @@ class _RoomWidgetState extends State<RoomWidget> {
                     const Icon(
                       Icons.thermostat,
                       color: Color.fromARGB(255, 182, 76, 74),
-                      size: 40,
+                      size: 35,
                     ),
                     Text(
                       '${room.celsius}ºC',
                       style: GoogleFonts.mulish(
                         color: Colors.white70,
-                        fontSize: 40,
+                        fontSize: widget.fontSize,
                         fontWeight: FontWeight.w600,
                       ),
                     )
@@ -103,13 +104,13 @@ class _RoomWidgetState extends State<RoomWidget> {
                     const Icon(
                       Icons.water_drop,
                       color: Color.fromRGBO(103, 115, 209, 1),
-                      size: 40,
+                      size: 35,
                     ),
                     Text(
                       '${room.humidity}%',
                       style: GoogleFonts.mulish(
                         color: Colors.white70,
-                        fontSize: 40,
+                        fontSize: widget.fontSize,
                         fontWeight: FontWeight.w600,
                       ),
                     )
@@ -128,7 +129,7 @@ class _RoomWidgetState extends State<RoomWidget> {
                   room.updatedAt.humanize(),
                   style: GoogleFonts.roboto(
                     color: Colors.white70,
-                    fontSize: 20,
+                    fontSize: 16,
                   ),
                 ),
               ],

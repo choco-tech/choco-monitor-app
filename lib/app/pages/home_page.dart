@@ -27,12 +27,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       backgroundColor: context.colors.background,
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            RoomWidget(roomId: 'room1'),
-            RoomWidget(roomId: 'room2'),
+          children: [
+            RoomWidget(roomId: 'dhtDevice1'),
+            RoomWidget(roomId: 'dhtDevice2'),
           ],
         ),
       ),

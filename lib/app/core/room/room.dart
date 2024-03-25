@@ -1,8 +1,8 @@
 class Room {
   final String roomId;
   final String name;
-  final int celsius;
-  final int humidity;
+  final double celsius;
+  final double humidity;
   final DateTime updatedAt;
 
   Room(
@@ -17,8 +17,8 @@ class Room {
     return Room(
       map['roomId'] as String,
       map['roomName'] as String,
-      map['celsius'] as int,
-      map['humidity'] as int,
+      map['celsius'] as double,
+      map['humidity'] as double,
       DateTime.fromMicrosecondsSinceEpoch((map['updatedAt'] as int) * 1000),
     );
   }

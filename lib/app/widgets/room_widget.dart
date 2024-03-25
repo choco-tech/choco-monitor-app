@@ -9,7 +9,7 @@ class RoomWidget extends StatefulWidget {
   final String roomId;
   final double margin = 20;
   final double borderRadius = 20;
-  final double fontSize = 30;
+  final double fontSize = 28;
   final double iconSize = 35;
 
   const RoomWidget({super.key, required this.roomId});
@@ -19,7 +19,7 @@ class RoomWidget extends StatefulWidget {
 }
 
 class _RoomWidgetState extends State<RoomWidget> {
-  Room room = Room('roomId', 'roomName', 0, 0, DateTime.now());
+  Room room = Room('roomId', 'roomName', 0.0, 0.0, DateTime.now());
 
   @override
   void initState() {
@@ -86,7 +86,7 @@ class _RoomWidgetState extends State<RoomWidget> {
                       size: 35,
                     ),
                     Text(
-                      '${room.celsius}ºC',
+                      '${room.celsius.toStringAsFixed(1)}ºC',
                       style: GoogleFonts.mulish(
                         color: Colors.white70,
                         fontSize: widget.fontSize,
@@ -107,7 +107,7 @@ class _RoomWidgetState extends State<RoomWidget> {
                       size: 35,
                     ),
                     Text(
-                      '${room.humidity}%',
+                      '${room.humidity.toStringAsFixed(1)}%',
                       style: GoogleFonts.mulish(
                         color: Colors.white70,
                         fontSize: widget.fontSize,

@@ -1,21 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
 
 class ClimateRepository {
-  final DatabaseReference ref = FirebaseDatabase.instance.ref();
+  final database = FirebaseDatabase.instance;
 
-  getAll() async {
-    DatabaseReference roomRef = FirebaseDatabase.instance.ref('data/room1/');
+  Stream<DatabaseEvent> onUpdate(String roomId) {
+    DatabaseReference roomRef = database.ref('data/$roomId/');
 
-    roomRef.onValue.listen((DatabaseEvent event) {
-      debugPrint(event.snapshot.value.toString());
-
-      // if (data != null) {
-      //   final map = Map<String, dynamic>.from(data);
-      //   debugPrint(map.keys.last);
-      // }
-    });
-
-    // return {temperature, humidity};
+    return roomRef.onValue;
   }
 }

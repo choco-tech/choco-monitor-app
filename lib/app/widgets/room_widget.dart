@@ -1,3 +1,4 @@
+import 'package:choco_health_monitor/app/core/firebase/database/climate_repository.dart';
 import 'package:choco_health_monitor/app/utils/format_date.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +20,18 @@ class RoomWidget extends StatefulWidget {
 }
 
 class _RoomWidgetState extends State<RoomWidget> {
+  final climateRepository = ClimateRepository();
   Room room = Room('roomId', 'roomName', 0.0, 0.0, DateTime.now());
 
   @override
   void initState() {
     super.initState();
 
-    DatabaseReference roomRef =
-        FirebaseDatabase.instance.ref('data/${widget.roomId}/');
+    setup();
+  }
 
-    roomRef.onValue.listen((DatabaseEvent event) {
+  void setup() {
+    climateRepository.onUpdate(widget.roomId).listen((DatabaseEvent event) {
       final map = event.snapshot.value as Map<Object?, Object?>;
 
       setState(() {

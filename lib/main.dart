@@ -1,5 +1,7 @@
+import 'package:choco_health_monitor/app/core/firebase/messaging/messaging_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +14,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await initLocalStorage();
+
+  await MessagingService.instance.initNotifications();
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 
